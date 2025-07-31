@@ -1,8 +1,8 @@
-# Repository Name
+# One Time Scripts
 
 ## Table of Contents
 
-- [Repository Name](#repository-name)
+- [One Time Scripts](#one-time-scripts)
   - [Table of Contents](#table-of-contents)
   - [Contributing](#contributing)
 

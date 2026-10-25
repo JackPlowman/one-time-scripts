@@ -7,10 +7,10 @@ on:
     types: [opened, synchronize]
   schedule:
     - cron: "0 0 * * *"
+  workflow_dispatch:
 
 permissions:
   contents: read
-  packages: read
 
 env:
   FORCE_COLOR: 1
@@ -20,10 +20,10 @@ jobs:
     name: Common Code Checks
     permissions:
       contents: read
-      actions: read
-      pull-requests: write
-      security-events: write
-    uses: JackPlowman/reusable-workflows/.github/workflows/common-code-checks.yml@c7b491eb600bdc990a92ee18b10e3e5b7c09212f # v2025.09.27.02
+      actions: read # to inspect actions with zizmor
+      pull-requests: write # to annotate pull requests
+      security-events: write # to upload security scan results
+    uses: JackPlowman/reusable-workflows/.github/workflows/common-code-checks.yml@f82d61d53648ae90f8a0406c0f4bbf1aef332337 # v2026.10.25.01
     secrets:
       workflow_github_token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -31,10 +31,10 @@ jobs:
     name: CodeQL Analysis
     permissions:
       contents: read
-      security-events: write
+      security-events: write # to upload CodeQL results
     strategy:
       matrix:
         language: [actions]
-    uses: JackPlowman/reusable-workflows/.github/workflows/codeql-analysis.yml@c7b491eb600bdc990a92ee18b10e3e5b7c09212f # v2025.09.27.02
+    uses: JackPlowman/reusable-workflows/.github/workflows/codeql-analysis.yml@f82d61d53648ae90f8a0406c0f4bbf1aef332337 # v2026.10.25.01
     with:
       language: ${{ matrix.language }}

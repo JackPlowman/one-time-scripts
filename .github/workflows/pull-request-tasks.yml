@@ -10,7 +10,7 @@ jobs:
   common-pull-request-tasks:
     name: Common Pull Request Tasks
     permissions:
-      pull-requests: write
-    uses: JackPlowman/reusable-workflows/.github/workflows/common-pull-request-tasks.yml@c7b491eb600bdc990a92ee18b10e3e5b7c09212f # v2025.09.27.02
+      pull-requests: write # to label pull requests and report dependency reviews
+    uses: JackPlowman/reusable-workflows/.github/workflows/common-pull-request-tasks.yml@f82d61d53648ae90f8a0406c0f4bbf1aef332337 # v2026.10.25.01
     secrets:
       workflow_github_token: ${{ secrets.GITHUB_TOKEN }}

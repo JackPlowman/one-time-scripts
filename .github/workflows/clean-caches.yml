@@ -7,11 +7,18 @@ on:
 
 permissions: {}
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   clean-caches:
     name: Clean Caches
     permissions:
-      contents: read
-    uses: JackPlowman/reusable-workflows/.github/workflows/common-clean-caches.yml@c7b491eb600bdc990a92ee18b10e3e5b7c09212f # v2025.09.27.02
-    secrets:
-      workflow_github_token: ${{ secrets.GH_TOKEN }}
+      actions: write # to delete repository caches
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete caches
+        run: gh cache delete --all --succeed-on-no-cache --repo "$GITHUB_REPOSITORY"
+        env:
+          GH_TOKEN: ${{ github.token }}
